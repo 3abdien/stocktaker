@@ -1,0 +1,21 @@
+# Each app also has its own .gitignore; these cover the whole repo.
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+dist/
+.expo/
+
+# Local databases and secrets - never commit.
+*.db
+.env
+.env.local
+.env.*.local
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db

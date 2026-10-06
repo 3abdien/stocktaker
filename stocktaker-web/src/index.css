@@ -1,0 +1,401 @@
+/* Design tokens - the same palette as the platform's requirements spec
+   (a deep teal accent for normal actions, a warm amber for anything
+   pending/flagged, red reserved purely for "you should look at this now"),
+   so the dashboard and the earlier architecture doc read as one system. */
+:root {
+  --bg: #f7f6f3;
+  --surface: #ffffff;
+  --surface-2: #f0eee9;
+  --ink: #1c2321;
+  --muted: #5c6b66;
+  --accent: #256d6b;
+  --accent-ink: #0f3e3d;
+  --warm: #b4632a;
+  --warm-bg: #f5e6d8;
+  --danger: #b3261e;
+  --danger-bg: #fbe9e7;
+  --border: #dde0da;
+  --radius: 8px;
+  --font: -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 14px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 8px;
+}
+
+a {
+  color: var(--accent);
+}
+
+code {
+  font-family: var(--mono);
+}
+
+/* ---------- layout ---------- */
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar .brand {
+  font-weight: 800;
+  font-size: 18px;
+  padding: 4px 10px 16px;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar a {
+  color: var(--ink);
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  font-weight: 500;
+}
+
+.sidebar a:hover {
+  background: var(--surface-2);
+}
+
+.sidebar a.active {
+  background: var(--accent);
+  color: white;
+}
+
+.sidebar .user-box {
+  margin-top: auto;
+  padding: 10px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.sidebar .user-box strong {
+  color: var(--ink);
+  display: block;
+  font-size: 13px;
+}
+
+.main {
+  flex: 1;
+  padding: 28px 32px;
+  max-width: 1100px;
+}
+
+.full-page-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 24px;
+}
+
+/* ---------- controls ---------- */
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover {
+  opacity: 0.92;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button.secondary {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+
+button.danger {
+  background: var(--danger);
+}
+
+input,
+select,
+textarea {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 7px 10px;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+form .form-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* ---------- cards / stats ---------- */
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.stat-card .value {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.stat-card .label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+
+/* ---------- table ---------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+
+th {
+  background: var(--surface-2);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr.clickable {
+  cursor: pointer;
+}
+
+tr.clickable:hover {
+  background: var(--surface-2);
+}
+
+/* ---------- badges ---------- */
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.badge.low-stock,
+.badge.rejected {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.badge.pending {
+  background: var(--warm-bg);
+  color: var(--warm);
+}
+
+.badge.resolved,
+.badge.ok {
+  background: var(--surface-2);
+  color: var(--accent-ink);
+}
+
+/* ---------- modal ---------- */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 24, 22, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  padding: 16px;
+}
+
+.modal {
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 22px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal h3 {
+  margin-bottom: 14px;
+}
+
+/* ---------- misc ---------- */
+
+.error-text {
+  color: var(--danger);
+  font-size: 13px;
+  margin: 8px 0;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.empty-state {
+  color: var(--muted);
+  padding: 24px;
+  text-align: center;
+}
+
+/* ---------- reports / photos ---------- */
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.tabs button {
+  background: var(--surface);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.tabs button.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.report-photo {
+  width: 100%;
+  max-height: 260px;
+  object-fit: contain;
+  background: var(--surface-2);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-2);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.report-thumb {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 340px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px;
+}

@@ -1,0 +1,21 @@
+# Render Blueprint: one free web service running the root Dockerfile (API +
+# web dashboard). The database is Neon's free Postgres, not Render's (which
+# expires after 30 days on the free plan), so DATABASE_URL is pasted in.
+#
+# Deploy: Render dashboard -> New -> Blueprint -> pick this repo.
+services:
+  - type: web
+    name: stocktaker
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        sync: false # paste Neon's connection string when prompted
+      - key: INITIAL_ADMIN_PASSWORD
+        sync: false # password for the first `admin` login - choose your own
+      - key: JWT_SECRET
+        generateValue: true # long random value, generated once by Render
